@@ -1,8 +1,9 @@
 FROM hyperflowwms/montage2-alpine-node-12:montage5.0-patched
 
 RUN apk update
-RUN apk add gfortran -y
-RUN touch LEVEL_01.DIR
+RUN apk add gfortran
+# TODO: instead, compile under alpine
+RUN apk add libc6-compat
 RUN echo "/workspace" >> LEVEL_01.DIR
 
 # Version of the job executor should be passed via docker build, e.g.: 
@@ -13,6 +14,6 @@ ENV HYPERFLOW_JOB_EXECUTOR_VERSION=$hf_job_executor_version
 RUN npm install -g @hyperflow/job-executor@${HYPERFLOW_JOB_EXECUTOR_VERSION}
 
 COPY hydrus .
-CMD ["sh", "-c", "hflow-job-execute ${HF_TASK_ID} ${HF_REDIS_URL}"]
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
-# use line above to debug content inside container (comment the CMD line)
+# TODO: find out why it does not work
+# COPY sample/ workspace/ 
+# CMD ["./hydrus"]
