@@ -9,13 +9,14 @@ spec:
       volumes:
       - name: nfs-vol
         persistentVolumeClaim:
-          claimName: nfs-volume-name
+          claimName: <nfs-volume-name>
       containers:
       - name: hydrus
-        image: hydrus-job-image
+        image: <hydrus-job-image>
         args: ["hflow-job-execute", "<task_id>", "<redis_url>"]
         volumeMounts:
         - mountPath: /workspace
           name: nfs-vol
+          subPath: /<project>/hydrus/<model_name>
       restartPolicy: Never
   backoffLimit: 1
