@@ -9,10 +9,11 @@ spec:
       volumes:
       - name: nfs-vol
         persistentVolumeClaim:
-          claimName: <nfs-volume-name>
+          claimName: <nfs-pvc-name>
       containers:
       - name: hydrus
-        image: <hydrus-job-image>
+        image: watermodelling/hydrus-job:latest
+        imagePullPolicy: Alawys
         args: ["hflow-job-execute", "<task_id>", "<redis_url>"]
         volumeMounts:
         - mountPath: /workspace
