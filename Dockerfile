@@ -13,7 +13,9 @@ ENV HYPERFLOW_JOB_EXECUTOR_VERSION=$hf_job_executor_version
 
 RUN npm install -g @hyperflow/job-executor@${HYPERFLOW_JOB_EXECUTOR_VERSION}
 
-COPY hydrus .
+COPY hydrus hydrus
+RUN chmod +x hydrus
+
 # TODO: find out why it does not work
 # COPY sample/ workspace/ 
 # CMD ["./hydrus"]
